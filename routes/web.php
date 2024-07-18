@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController; //<---- Import del controller precedentemente creato!
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\TechnologyController;
 use App\Models\Project;
 
 /*
@@ -37,6 +38,7 @@ Route::middleware(['auth'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('project', ProjectController::class);
+        Route::resource('technology', TechnologyController::class);
     });
 
 

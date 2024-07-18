@@ -23,6 +23,7 @@ class ProjectSeeder extends Seeder
             $newProject->end_date = $faker->date($format = 'Y-m-d', $max = 'now');
             $newProject->status = $faker->numberBetween(0, 1);
             $newProject->save();
+            $newProject->technologies()->sync(rand(1, 4));
         }
     }
 }
