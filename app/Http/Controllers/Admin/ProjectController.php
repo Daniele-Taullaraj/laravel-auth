@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -51,6 +53,7 @@ class ProjectController extends Controller
             $newProject->end_date = $data['end_date'];
             $newProject->status = 1;
         }
+        $newProject->type_id = $data['type_id'];
 
         $newProject->save();
 
@@ -72,7 +75,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $data = ['project' => $project];
+        $data = ['project' => $project, 'type' => Type::all()];
         return view('admin.project.edit', $data);
     }
 
@@ -92,6 +95,7 @@ class ProjectController extends Controller
             $project->end_date = $data['end_date'];
             $project->status = 1;
         }
+        $project->type_id = $data['type_id'];
 
         $project->save();
 

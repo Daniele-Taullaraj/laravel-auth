@@ -8,8 +8,11 @@
 			@method('PUT')
 			@csrf
 			<div class="form-group">
-				<label for="name">Name:</label>
+				<label for="name">Nameeee:</label>
 				<input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}" required>
+				@error('name')
+				<div class="text-danger">{{ $message }}</div>
+				@enderror
 			</div>
 
 			<div class="form-group mt-3">
@@ -28,7 +31,17 @@
 				<input type="date" class="form-control" id="end_date" name="end_date" value="{{ $project->end_date }}">
 			</div>
 
-			<button type="submit" class="btn btn-primary mt-3">Modifica Progetto</button>
+			<div class="form-group mt-3">
+                <label for="type_id">Type:</label>
+                <select name="type_id" id="type_id" class="form-control">
+                    @foreach ($type as $singleType)
+                        <option value="{{ $singleType->id }}" {{ $project->type_id == $singleType->id ? 'selected' : '' }}>{{ $singleType->name }}</option>
+                    @endforeach
+                </select>
+               
+            </div>
+
+			<button type="submit" class="btn btn-primary mt-3 d-block">Modifica Progetto</button>
 		</form>
 	</div>
 @endsection

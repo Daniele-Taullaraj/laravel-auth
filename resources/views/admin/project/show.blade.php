@@ -15,8 +15,9 @@
 						@else
 							<div class="red fw-bold">Non Completato</div>
 						@endif
+						<h4>{{$project->type->name}}</h1>
 						<div class="d-flex justify-content-between">
-							<div><button class="btn btn-warning">Modifica</button></div>
+							<div><a href="{{route('admin.project.edit',$project)}}"><button class="btn btn-warning">Modifica</button></a></div>
 							<form action="{{ route('admin.project.destroy', $project) }}" method="POST">
 								@csrf
 								@method('DELETE')
