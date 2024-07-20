@@ -14,6 +14,11 @@
 					<div class="card">
 						<div class="card-header"><a href="{{ route('admin.project.show', $project) }}">{{ $project->name }}</a></div>
 						<div class="card-body">
+							@if (Str::startsWith($project->img, 'http'))
+								<img class="img-fluid mx-auto d-block my-3" src="{{ $project->img }}" alt="">
+							@else
+								<img class="img-fluid mx-auto d-block my-3" src="{{ asset('storage/' . $project->img) }}" alt="">
+							@endif
 							<div>{{ $project->description }}</div>
 							<div>-Data inizio: {{ $project->start_date }}</div>
 							<div>-Data fine: {{ $project->end_date }}</div>

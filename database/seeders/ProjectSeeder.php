@@ -18,6 +18,7 @@ class ProjectSeeder extends Seeder
             $newProject = new Project();
             $newProject->name = $faker->sentence(3);
             $newProject->description = $faker->paragraph(2);
+            $newProject->img = 'https://picsum.photos/id/' . rand(1, 237) . '/200/300';
             $newProject->type_id = $faker->numberBetween(1, 3);
             $newProject->start_date = $faker->date($format = 'Y-m-d', $max = 'now');
             $newProject->end_date = $faker->date($format = 'Y-m-d', $max = 'now');

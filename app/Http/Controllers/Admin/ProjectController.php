@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -33,7 +34,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.project.create');
+        $type = Type::all();
+        $data = ['type' => $type];
+
+        return view('admin.project.create', $data);
     }
 
     /**
@@ -41,11 +45,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $newProject = new Project();
         $newProject->name = $data['name'];
         $newProject->description = $data['description'];
+        if ($request->has('img')) {
+            $image_path = Storage::put('uploads', $request->img);
+            $newProject->img = $image_path;
+        }
         $newProject->start_date = $data['start_date'];
         if (empty($data['end_date'])) {
             $newProject->status = 0;
@@ -54,6 +62,8 @@ class ProjectController extends Controller
             $newProject->status = 1;
         }
         $newProject->type_id = $data['type_id'];
+
+        // dd($newProject);
 
         $newProject->save();
 
@@ -84,7 +94,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $project->name = $data['name'];
         $project->description = $data['description'];

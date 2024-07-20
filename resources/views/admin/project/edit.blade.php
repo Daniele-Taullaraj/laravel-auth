@@ -21,6 +21,12 @@
 			</div>
 
 			<div class="form-group mt-3">
+				<label for="img">Image:</label>
+				<input type="file" name="img" id="img" class="form-control" >
+			</div>
+
+
+			<div class="form-group mt-3">
 				<label for="start_date">Start Date:</label>
 				<input type="date" class="form-control" id="start_date" name="start_date" value="{{ $project->start_date }}"
 					required>

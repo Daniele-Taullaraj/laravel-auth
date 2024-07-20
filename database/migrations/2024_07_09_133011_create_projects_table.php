@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('description');
+            $table->string('img');
             $table->foreignId('type_id')->constrained();
             $table->date('start_date');
             $table->date('end_date')->nullable();
